@@ -129,7 +129,15 @@ export function makeApp(env: Env) {
   const server = new x402ResourceServer(new HTTPFacilitatorClient({ url: env.FACILITATOR_URL }))
     .register(env.NETWORK as `${string}:${string}`, new ExactEvmScheme())
     .registerExtension(bazaarResourceServerExtension);
-  app.use(paymentMiddleware(routes(env.PAY_TO, env.NETWORK), server));
+  // On Workers, a fetch belongs to the request that started it: the middleware's own start-up sync would begin in
+  // whichever request built the app (say, the index page) and hang later paid calls. Each paid request syncs with
+  // the facilitator itself until one succeeds.
+  let ready = false;
+  app.use("/v1/*", async (_c, next) => {
+    if (!ready) { await server.initialize(); ready = true; }
+    await next();
+  });
+  app.use(paymentMiddleware(routes(env.PAY_TO, env.NETWORK), server, undefined, undefined, false));
   app.get("/v1/stamp-duty", (c) => c.json(stampDuty(state(c.req.query("state")), Number(c.req.query("price")))));
   app.get("/v1/income-tax", (c) => c.json(incomeTaxReport(Number(c.req.query("income")))));
   app.get("/v1/property-analysis", (c) => c.json(analyse(inputsFrom(c.req.query()))));
