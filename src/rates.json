@@ -1,0 +1,26 @@
+{
+  "as_at": "November 2026",
+  "duty": {
+    "notes": "Rows are the general (investor) rate on the value over 'From'; where a state taxes the whole value at a flat rate, the base is that rate on 'From' so the same sum works. Duty is charged per $100 or part of $100. Foreign purchaser surcharges (NSW 9%, VIC 8%, QLD 8%, WA 7%, TAS 8%, SA 7%) are not included.",
+    "NSW": {"applies": "Contracts 1 Jul 2026 – 30 Jun 2027", "source": "https://www.revenue.nsw.gov.au/_resources/duties-links/current-thresholds-and-rates",
+      "brackets": [[0, 0, 1.25], [18000, 225, 1.5], [38000, 525, 1.75], [103000, 1662, 3.5], [387000, 11602, 4.5], [1290000, 52237, 5.5], [3870000, 194137, 7.0]]},
+    "VIC": {"applies": "Contracts from 1 Jul 2021 (checked Sep 2026)", "source": "https://www.sro.vic.gov.au/rates-taxes-duties-and-levies/general-land-transfer-duty-property-current-rates",
+      "brackets": [[0, 0, 1.4], [25000, 350, 2.4], [130000, 2870, 6.0], [960000, 52800, 5.5], [2000000, 110000, 6.5]]},
+    "QLD": {"applies": "Current (checked Jun 2026)", "source": "https://qro.qld.gov.au/duties/transfer-duty/calculating/rates/",
+      "brackets": [[0, 0, 0], [5000, 0, 1.5], [75000, 1050, 3.5], [540000, 17325, 4.5], [1000000, 38025, 5.75]]},
+    "WA": {"applies": "Current (checked Jul 2026)", "source": "https://www.wa.gov.au/organisation/department-of-finance/transfer-duty-assessment",
+      "brackets": [[0, 0, 1.9], [120000, 2280, 2.85], [150000, 3135, 3.8], [360000, 11115, 4.75], [725000, 28453, 5.15]]},
+    "SA": {"applies": "Current published scale", "source": "https://revenuesa.sa.gov.au/stampduty/rate-of-stamp-duty",
+      "brackets": [[0, 0, 1.0], [12000, 120, 2.0], [30000, 480, 3.0], [50000, 1080, 3.5], [100000, 2830, 4.0], [200000, 6830, 4.25], [250000, 8955, 4.75], [300000, 11330, 5.0], [500000, 21330, 5.5]]},
+    "TAS": {"applies": "Transfers from 21 Oct 2013 (still current)", "source": "https://www.sro.tas.gov.au/property-transfer-duties/rates-of-duty",
+      "brackets": [[0, 50, 0], [3000, 50, 1.75], [25000, 435, 2.25], [75000, 1560, 3.5], [200000, 5935, 4.0], [375000, 12935, 4.25], [725000, 27810, 4.5]]},
+    "ACT": {"applies": "Non-owner-occupier, 1 Jul 2026 – 30 Jun 2027 (DI2026-155)", "source": "https://www.revenue.act.gov.au/rates-and-property-charges/conveyance-duty-stamp-duty/conveyance-duty-for-non-commercial-property",
+      "brackets": [[0, 0, 1.2], [200000, 2400, 2.2], [300000, 4600, 3.4], [500000, 11400, 4.32], [750000, 22200, 5.9], [1000000, 36950, 6.4], [1455000, 66057, 4.54]]},
+    "NT": {"applies": "Stamp Duty Act 1978 Sch 1 (formula up to $525,000)", "source": "http://classic.austlii.edu.au/au/legis/nt/consol_act/sda1978151/sch1.html",
+      "brackets": [[525000.01, 25987.5, 4.95], [3000000, 172500, 5.75], [5000000, 297500, 5.95]]}
+  },
+  "tax": {"applies": "2026-27", "source": "https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents",
+    "brackets": [[18200, 0.15], [45000, 0.30], [135000, 0.37], [190000, 0.45]], "medicare": 0.02},
+  "cgt": {"discount": 0.5, "min_rate": 0.30,
+    "note": "From 1 July 2027 (law since June 2026): the 50% discount is replaced by CPI indexation of the cost base and a 30% minimum tax on real gains made after that date; gains made before it keep the 50% discount. New builds may choose either method. Established homes bought after 12 May 2026 can't be negatively geared against other income from 1 July 2027: losses carry forward against residential income and capital gains. Sources: ato.gov.au (Tax reform – negative gearing and CGT, 29 Jun 2026); budget.gov.au tax explainer."}
+}

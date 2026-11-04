@@ -1,0 +1,25 @@
+{
+  "name": "au-data-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --config vitest.config.ts",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test",
+    "dryrun": "wrangler deploy --dry-run --outdir dist"
+  },
+  "dependencies": {
+    "@x402/core": "2.29.0",
+    "@x402/evm": "2.29.0",
+    "@x402/extensions": "2.29.0",
+    "@x402/hono": "2.29.0",
+    "hono": "^4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4",
+    "typescript": "6.0.3",
+    "vitest": "4.1.12",
+    "wrangler": "4.151.3"
+  }
+}
