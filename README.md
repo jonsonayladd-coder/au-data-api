@@ -55,7 +55,7 @@ Lessons worth sharing:
 
 All rates sit in [`src/rates.json`](src/rates.json), each with its official source and date: the eight state revenue offices, the ATO 2026-27 resident scale, and the ATO and Budget 2026-27 explainers on the 1 July 2027 changes. Stamp duty is charged per $100 or part of $100. Victoria (from $960k), the ACT top band and the NT (over $525k) tax the whole value at a flat rate, and the NT formula applies below $525k. The tests check every state at three prices against hand calculations.
 
-The same model also ships as a spreadsheet: the Australian Property Investment Calculator.
+The same model also ships as a spreadsheet, the [Australian Property Investment Calculator](https://au-property-shop.allgoodnow.workers.dev/), and as free [stamp duty calculators for every state](https://au-property-shop.allgoodnow.workers.dev/stamp-duty-calculator) with a [plain-English guide to the 2027 negative gearing and CGT changes](https://au-property-shop.allgoodnow.workers.dev/negative-gearing-2027).
 
 ## Run it yourself
 
