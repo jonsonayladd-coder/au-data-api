@@ -6,6 +6,7 @@
   "workers_dev": true,
   "vars": {
     "FACILITATOR_URL": "https://facilitator.payai.network",
-    "NETWORK": "eip155:8453"
+    "NETWORK": "eip155:8453",
+    "VERIFY_402INDEX": "4b2feb312b288794e68d4e3e5c677ad76de7997d1d9dcb5222b0fe53c434c9c5"
   }
 }

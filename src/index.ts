@@ -8,7 +8,7 @@ import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
 import { PROPERTY_TYPES, STATES, analyse, incomeTaxReport, stampDuty, type AnalysisInput, type State } from "./calc";
 import { report } from "./report";
 
-export interface Env { PAY_TO: string; FACILITATOR_URL: string; NETWORK: string }
+export interface Env { PAY_TO: string; FACILITATOR_URL: string; NETWORK: string; VERIFY_402INDEX?: string }
 
 const BASE = "eip155:8453";
 const num = (v: string | undefined) => (v == null || v === "" ? undefined : Number(v));
@@ -112,8 +112,20 @@ export function makeApp(env: Env) {
     return c.json({ version: 1, resources: Object.keys(routes(env.PAY_TO)).map((k) => o + k.split(" ")[1]), ownershipProofs: [] });
   });
   app.get("/openapi.json", (c) => c.json(openapi(new URL(c.req.url).origin)));
+  // 402 Index domain ownership: the public hash of the claim token (the token itself is a Cloudflare secret)
+  app.get("/.well-known/402index-verify.txt", (c) => (env.VERIFY_402INDEX ? c.text(env.VERIFY_402INDEX) : c.notFound()));
   // inputs are checked in the handlers: a call that fails returns 400 and its payment is cancelled (the x402
   // middleware never settles a response of 400 or more), so a directory's probe always reaches the 402 challenge
+  // some directories (x402dash) read the payment terms from the body, not the v2 PAYMENT-REQUIRED header: send both
+  app.use("/v1/*", async (c, next) => {
+    await next();
+    const hdr = c.res.headers.get("payment-required");
+    if (c.res.status !== 402 || !hdr || !(c.res.headers.get("content-type") ?? "").includes("json")) return;
+    const body = await c.res.clone().text();
+    if (body.includes('"accepts"')) return;
+    const headers = new Headers(c.res.headers);
+    c.res = new Response(atob(hdr), { status: 402, headers });
+  });
   const server = new x402ResourceServer(new HTTPFacilitatorClient({ url: env.FACILITATOR_URL }))
     .register(env.NETWORK as `${string}:${string}`, new ExactEvmScheme())
     .registerExtension(bazaarResourceServerExtension);

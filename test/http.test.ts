@@ -26,6 +26,9 @@ describe("HTTP", () => {
     expect(acc.payTo).toBe(env.PAY_TO);
     expect(Number(acc.amount ?? acc.maxAmountRequired)).toBe(5000); // $0.005 in USDC's 6 decimals
     expect(JSON.stringify(body)).toContain("bazaar");
+    // the same terms are in the body too, for directories that read only the body
+    const inBody = (await r.json()) as { accepts: { payTo: string }[] };
+    expect(inBody.accepts[0]!.payTo).toBe(env.PAY_TO);
   }, 30000);
   it("a bare probe (a directory checking the route) gets the payment challenge, not an error", async () => {
     for (const path of ["/v1/stamp-duty", "/v1/income-tax", "/v1/property-analysis"]) expect((await app.request(path)).status).toBe(402);
